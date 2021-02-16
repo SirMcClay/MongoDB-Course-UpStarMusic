@@ -9,4 +9,12 @@ const Artist = require('../models/artist');
  * @return {promise} A promise that resolves with the artists, count, offset, and limit
  */
 module.exports = (criteria, sortProperty, offset = 0, limit = 20) => {
+	// Write a query that will follow sort, offset, limit options only
+	// do not worry about 'criteria' yet
+
+	// ES5 approach
+	const sortOrder = {};
+	sortOrder[sortProperty] = 1;
+
+	Artist.find({}).sort(sortOrder);
 };
