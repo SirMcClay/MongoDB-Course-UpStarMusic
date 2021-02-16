@@ -31,6 +31,8 @@ const buildQuery = (criteria) => {
 	const query = {};
 
 	if (criteria.name) {
+		// For this work as expected we have to create a index inside mongo shell cli
+		// using a command "db.artists.createIndex({ name: "text" })"
 		query.$text = { $search: criteria.name };
 	}
 
