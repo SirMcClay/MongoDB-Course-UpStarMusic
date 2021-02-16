@@ -12,8 +12,17 @@ module.exports = (criteria, sortProperty, offset = 0, limit = 20) => {
 	// Write a query that will follow sort, offset, limit options only
 	// do not worry about 'criteria' yet
 
-	const query = Artist.find({})
+	const query = Artist.find(criteria)
 		.sort({ [sortProperty]: 1 })
 		.skip(offset)
 		.limit(limit);
+
+	return Promise.all([query, Artist.count()]).then((results) => {
+		return {
+			all: results[0],
+			count: results[1],
+			offset,
+			limit,
+		};
+	});
 };
