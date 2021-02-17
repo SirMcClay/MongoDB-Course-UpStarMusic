@@ -6,4 +6,6 @@ const Artist = require('../models/artist');
  * @return {promise} A promise that resolves after the update
  */
 module.exports = (_ids) => {
+	// .update was deprecated and now use updateMany or updateOne instead
+	return Artist.updateMany({ _id: { $in: _ids } }, { retired: true });
 };
